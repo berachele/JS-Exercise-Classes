@@ -48,7 +48,7 @@ class Person {
   }
   eat(someFood){
     if (this.stomach.length < 10){
-      return this.stomach.push(this.stomach);
+      return this.stomach.push(someFood);
     }
   }
   poop(){
@@ -85,42 +85,59 @@ class Car {
   }
   drive(distance){
     this.odometer = this.odometer + distance;
-    this.tank = 
+    // this.tank = //tank at start - tank at end then divide by gallons used = milesPerGallon --maybe do this.mPG = this equation so this.tank can be an easier one
   }
 }
 
 /*
   TASK 3
     - Write a Lambdasian class.
-    - Its constructor takes a single argument - an object with the following keys:
-        + name
-        + age
-        + location
-    - Its constructor should initialize `name`, `age` and `location` properties on the instance.
-    - Instances of Lambdasian should be able to `.speak()`:
-        + Speaking should return a phrase `Hello my name is {name}, I am from {location}`.
-        + {name} and {location} of course come from the instance's own properties.
+    - Its constructor takes a single argument ✅- an object with the following keys:
+        + name ✅
+        + age ✅ 
+        + location ✅
+    - Its constructor should initialize `name`, `age` and `location` properties on the instance. ✅
+    - Instances of Lambdasian should be able to `.speak()`: ✅
+        + Speaking should return a phrase `Hello my name is {name}, I am from {location}`.✅
+        + {name} and {location} of course come from the instance's own properties.✅
 */
 class Lambdasian {
-
+  constructor(info){
+    this.name = info.name;
+    this.age = info.age;
+    this.location = info.location;
+  }
+  speak(){
+    return `Hello my name is ${this.name}, I am from ${this.location}.`;
+  }
 }
-
 /*
   TASK 4
-    - Write an Instructor class extending Lambdasian.
-    - Its constructor takes a single argument - an object with the following keys:
-        + All the keys used to initialize instances of Lambdasian.
-        + `specialty`: what the instance of Instructor is good at, i.e. 'redux'
-        + `favLanguage`: i.e. 'JavaScript, Python, Elm etc.'
-        + `catchPhrase`: i.e. `Don't forget the homies`.
-    - The constructor calls the parent constructor passing it what it needs.
-    - The constructor should also initialize `specialty`, `favLanguage` and `catchPhrase` properties on the instance.
+    - Write an Instructor class extending Lambdasian.✅
+    - Its constructor takes a single argument ✅ - an object with the following keys:
+        + All the keys used to initialize instances of Lambdasian.✅ 
+        + `specialty`: what the instance of Instructor is good at, i.e. 'redux'✅
+        + `favLanguage`: i.e. 'JavaScript, Python, Elm etc.'✅
+        + `catchPhrase`: i.e. `Don't forget the homies`.✅
+    - The constructor calls the parent constructor passing it what it needs.✅
+    - The constructor should also initialize `specialty`, `favLanguage` and `catchPhrase` properties on the instance.✅
     - Instructor instances have the following methods:
-        + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
-        + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
+        + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.✅
+        + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'✅
 */
-class Instructor {
-
+class Instructor extends Lambdasian{
+  constructor(teach){
+    super(teach);
+    this.specialty = teach.specialty;
+    this.favLanguage = teach.favLanguage;
+    this.catchPhrase = teach.catchPhrase;
+  }
+  demo(subject){
+    return `Today we are learning about ${subject}`;
+  }
+  grade(subject){
+    return `${this.name} receives a perfect score on ${subject}`;
+  }
 }
 
 /*
