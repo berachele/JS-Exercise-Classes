@@ -84,8 +84,21 @@ class Car {
     this.tank = this.tank + gallons;
   }
   drive(distance){
-    this.odometer = this.odometer + distance;
-    // this.tank = //tank at start - tank at end then divide by gallons used = milesPerGallon --maybe do this.mPG = this equation so this.tank can be an easier one
+    // this.odometer = this.odometer + distance;
+    // this.milesPerGallon = (this.tank - distance) / distance;
+    // this.tank = this.milesPerGallon;
+    // if (this.tank === 0){
+    //   return `I ran out of fuel a ${this.odometer} miles!`;
+    // }
+    const max = this.tank * this.milesPerGallon;
+    if(distance <= max){
+      this.odometer = this.odometer + distance;
+      this.tank = this.tank - distance / this.milesPerGallon;
+    }else {
+      this.odometer = this.odometer + max;
+      this.tank = 0;
+      return `I ran out of fuel at ${this.odometer} miles!`;
+    }
   }
 }
 
@@ -135,46 +148,71 @@ class Instructor extends Lambdasian{
   demo(subject){
     return `Today we are learning about ${subject}`;
   }
-  grade(subject){
-    return `${this.name} receives a perfect score on ${subject}`;
+  grade(student, subject){
+    return `${student.name} receives a perfect score on ${subject}`;//returning subject as 'object Object' on Project Manager??
   }
 }
 
 /*
   TASK 5
-    - Write a Student class extending Lambdasian.
-    - Its constructor takes a single argument -  an object with the following keys:
-        + All the keys used to initialize instances of Lambdasian.
-        + `previousBackground` i.e. what the Student used to do before Lambda School
-        + `className` i.e. CS132
-        + `favSubjects`. i.e. an array of the student's favorite subjects ['HTML', 'CSS', 'JS']
-    - The constructor calls the parent constructor passing to it what it needs.
-    - The constructor should also initialize `previousBackground`, `className` and `favSubjects` properties on the instance.
+    - Write a Student class extending Lambdasian.✅
+    - Its constructor takes a single argument ✅ -  an object with the following keys:
+        + All the keys used to initialize instances of Lambdasian.✅
+        + `previousBackground` i.e. what the Student used to do before Lambda School✅
+        + `className` i.e. CS132✅
+        + `favSubjects`. i.e. an array of the student's favorite subjects ['HTML', 'CSS', 'JS']✅
+    - The constructor calls the parent constructor passing to it what it needs.✅
+    - The constructor should also initialize `previousBackground`, `className` and `favSubjects` properties on the instance.✅
     - Student instances have the following methods:
-        + `listSubjects` a method that returns all of the student's favSubjects in a single string: `Loving HTML, CSS, JS!`.
-        + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
-        + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
+        + `listSubjects` a method that returns all of the student's favSubjects in a single string: `Loving HTML, CSS, JS!`.✅
+        + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`✅
+        + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`✅
 */
-class Student {
-
+class Student extends Lambdasian{
+  constructor(learn){
+    super(learn);
+    this.previousBackground = learn.previousBackground;
+    this.className = learn.className;
+    this.favSubjects = learn.favSubjects;
+  }
+  listSubjects(){
+    return `Loving ${this.favSubjects}`;
+  }
+  PRAssignment(subject){
+    return `${this.name} has submitted a PR for ${subject}`;
+  }
+  sprintChallenge(subject){
+    return `${this.name} has begun spring challenge on ${subject}`;
+  }
 }
 
 /*
   TASK 6
-    - Write a ProjectManager class extending Instructor.
-    - Its constructor takes a single argument - an object with the following keys:
+    - Write a ProjectManager class extending Instructor.✅
+    - Its constructor takes a single argument✅ - an object with the following keys:
         + All the keys used to initialize instances of Instructor.
-        + `gradClassName`: i.e. CS1
-        + `favInstructor`: i.e. Sean
-    - Its constructor calls the parent constructor passing to it what it needs.
-    - The constructor should also initialize `gradClassName` and `favInstructor` properties on the instance.
-    - ProjectManager instances have the following methods:
-        + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
-        + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
+        + `gradClassName`: i.e. CS1✅
+        + `favInstructor`: i.e. Sean✅
+    - Its constructor calls the parent constructor passing to it what it needs.✅
+    - The constructor should also initialize `gradClassName` and `favInstructor` properties on the instance.✅
+    - ProjectManager instances have the following methods:✅
+        + `standUp` a method that takes in a slack channel AS AN ARGUMENT and returns `{name} announces to {channel}, @channel standy times!`✅
+        + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`✅❓
 */
-class ProjectManager {
-
+class ProjectManager extends Instructor{
+  constructor(manager){
+    super(manager);
+    this.gradClassName = manager.gradClassName;
+    this.favInstructor = manager.favInstructor;
+  }
+  standUp(channel){
+    return `${this.name} announces to ${channel}, @channel standy times!`;
+  }
+  debugsCode(student, subject){
+    return `${this.name} debugs ${student.name}'s code on ${subject}`;
+  }
 }
+
 
 /*
   STRETCH PROBLEM (no tests!)
